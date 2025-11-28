@@ -32,69 +32,75 @@ public class Principal {
         System.out.println(serie);
 
 //        //Busca los datos de todas las temporadas
-//        for (int i = 1; i <= serie.totalDeTemporadas(); i++) {
-//            var jsonTemporada = consumoApi.obtenerDatos(URB_BASE + serieUsuario.replaceAll(" ", "+") + "&Season=" + i + API_KEY);
-//            var temporada = deserializacion.deserializar(jsonTemporada, DTOTemporadas.class);
-//            temporadas.add(temporada);
-//        }
-//        //Recorro cada episodio de cada temporada de la serie
-//        temporadas.forEach(t -> t.episodioList().forEach
-//                (e -> System.out.println(e.titulo())));
+        for (int i = 1; i <= serie.totalDeTemporadas(); i++) {
+            var jsonTemporada = consumoApi.obtenerDatos(URB_BASE + serieUsuario.replaceAll(" ", "+") + "&Season=" + i + API_KEY);
+            var temporada = deserializacion.deserializar(jsonTemporada, DTOTemporadas.class);
+            temporadas.add(temporada);
+        }
+        //Recorro cada episodio de cada temporada de la serie
+       temporadas.forEach(t -> t.episodioList().forEach
+                (e -> System.out.println(e.titulo())));
 
 
-//        //Filtrando las 5 mejores películas.
-//        List<DTOEpisodio> dtoEpisodioList = temporadas.stream()
-//                .flatMap(t -> t.episodioList().stream())
-//                .collect(Collectors.toList());
-//
-//        dtoEpisodioList.stream()
-//                .filter(e -> !e.evaluacion().equalsIgnoreCase("N/A"))
-//                .sorted(Comparator.comparing(DTOEpisodio::evaluacion).reversed())
-//                .limit(5)
-//                .forEach(System.out::println);
+        //Filtrando las 5 mejores películas.
+        List<DTOEpisodio> dtoEpisodioList = temporadas.stream()
+                .flatMap(t -> t.episodioList().stream())
+                .collect(Collectors.toList());
 
-//        //Convirtiendo los datos a una lista de la clase Episodio
+        dtoEpisodioList.stream()
+                .filter(e -> !e.evaluacion().equalsIgnoreCase("N/A"))
+                .sorted(Comparator.comparing(DTOEpisodio::evaluacion).reversed())
+                .limit(5)
+                .forEach(System.out::println);
+
+        //Convirtiendo los datos a una lista de la clase Episodio
         List<Episodio> episodios = temporadas.stream()
                 .flatMap(t -> t.episodioList().stream()
                         .map(e -> new Episodio(t.numero(), e)))
                         .collect(Collectors.toList());
-//
-//        episodios.forEach(System.out::println);
-//
-//        //Filtrando objetos episodios por fechas
-//        System.out.println("ingrese la fecha");
-//        var fecha = scanner.nextInt();
-//        scanner.nextLine();
-//
-//        LocalDate fechaFiltro = LocalDate.of(fecha, 1, 1);
-//        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-//        episodios.stream().
-//                filter(e -> e.getFechaDeLanzamiento() != null && e.getFechaDeLanzamiento().isAfter(fechaFiltro))
-//                .forEach(e -> System.out.println(
-//                        "Temporada: " + e.getTemporada() +
-//                                "Episodio: " + e.getNumeroEpisodio() +
-//                                "Fecha: " + e.getFechaDeLanzamiento().format(dtf)
-//                ));
 
-//        //Filtrando los objetos episodios por pedazo de Titulo
-//        System.out.println("Ingrese el Titulo del episodio");
-//        var titulo = scanner.nextLine();
-//
-//        //La clase Optional es un contenedor que puede o no contener un elemento que hayamos buscado
-//        //Comparamos y validamos los datos, para eso convertimos el comparador y el comparado en minúsculas.
-//        Optional<Episodio> coincidencias = episodios.stream()
-//                .filter(e -> e.getTitulo().toLowerCase().contains(titulo.toLowerCase()))
-//                .findFirst();
-//        //Si el contenedor tiene presente algún elemento, el dato fue encontrado y printeamos el elemento
-//       //De lo contrario printeamos que no fue encontrado
-//        System.out.println(coincidencias.isPresent() ? coincidencias.get() : "Episodio no encontrado");
+        episodios.forEach(System.out::println);
 
-        //Hallando una ranking global por temporada
+        //Filtrando objetos episodios por fechas
+        System.out.println("ingrese la fecha");
+        var fecha = scanner.nextInt();
+        scanner.nextLine();
+
+        LocalDate fechaFiltro = LocalDate.of(fecha, 1, 1);
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        episodios.stream().
+                filter(e -> e.getFechaDeLanzamiento() != null && e.getFechaDeLanzamiento().isAfter(fechaFiltro))
+                .forEach(e -> System.out.println(
+                        "Temporada: " + e.getTemporada() +
+                                "Episodio: " + e.getNumeroEpisodio() +
+                                "Fecha: " + e.getFechaDeLanzamiento().format(dtf)
+                ));
+
+        //Filtrando los objetos episodios por pedazo de Titulo
+        System.out.println("Ingrese el Titulo del episodio");
+        var titulo = scanner.nextLine();
+
+        //La clase Optional es un contenedor que puede o no contener un elemento que hayamos buscado
+        //Comparamos y validamos los datos, para eso convertimos el comparador y el comparado en minúsculas.
+        Optional<Episodio> coincidencias = episodios.stream()
+                .filter(e -> e.getTitulo().toLowerCase().contains(titulo.toLowerCase()))
+                .findFirst();
+        //Si el contenedor tiene presente algún elemento, el dato fue encontrado y printeamos el elemento
+       //De lo contrario printeamos que no fue encontrado
+        System.out.println(coincidencias.isPresent() ? coincidencias.get() : "Episodio no encontrado");
+
+        //Creando un Map que contenga la calificación por temporada de la Serie
         Map<Integer, Double> evaluacionPorTemporada = episodios.stream()
                                                         .filter(e -> e.getEvaluacion() > 0.0)
                                                         .collect(Collectors.groupingBy(Episodio::getTemporada,
                                                                 Collectors.averagingDouble(Episodio::getEvaluacion)));
         System.out.println(evaluacionPorTemporada);
+
+        //Resumen estadistico por temporada
+        DoubleSummaryStatistics est = episodios.stream()
+                .filter(e -> e.getEvaluacion() > 0.0)
+                .collect(Collectors.summarizingDouble(Episodio::getEvaluacion));
+        System.out.println(est);
 
 
     }
