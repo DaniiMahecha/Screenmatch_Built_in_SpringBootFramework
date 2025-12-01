@@ -32,7 +32,7 @@ The application integrates with the [OMDb API](http://www.omdbapi.com/) to fetch
 **This project represents countless hours of dedication and learning**, reflecting my growth as a backend developer. Every feature implemented showcases a new concept mastered and a challenge overcome.
 
 <div align="center">
-  <img src="assets/screenmatch-banner.png" alt="ScreenMatch Banner" width="800"/>
+  <img src="src/main/java/com/daniidev/screenmatch/assests/ChatGPT Image 1 dic 2025, 00_47_34.png" alt="ScreenMatch Banner" width="400"/>
 </div>
 
 ---
@@ -180,14 +180,21 @@ Finds episodes with "winter" in the title (case-insensitive)
 ### Example Output Features
 
 <div align="center">
-  <img src="assets/screenmatch-demo1.png" alt="Series Search and Episodes" width="700"/>
+  <img src="src/main/java/com/daniidev/screenmatch/assests/Captura de pantalla 2025-12-01 005037.png" alt="Series Search and Episodes" width="400"/>
   <p><em>Searching for a series and viewing all episodes data</em></p>
 </div>
 
 <div align="center">
-  <img src="assets/screenmatch-demo2.png" alt="Filtering and Statistics" width="700"/>
+  <img src="src/main/java/com/daniidev/screenmatch/assests/Captura de pantalla 2025-12-01 005159.png" alt="Filtering and Statistics" width="400"/>
   <p><em>Top episodes ranking, date filtering, and statistical analysis</em></p>
 </div>
+
+<div align="center">
+  <img src="src/main/java/com/daniidev/screenmatch/assests/Captura de pantalla 2025-12-01 005422.png" alt="Filtering and Statistics" width="900"/>
+  <p><em>Top episodes ranking, date filtering, and statistical analysis</em></p>
+</div>
+
+
 
 ---
 
