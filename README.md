@@ -312,6 +312,8 @@ This project is an integral part of my ongoing training as a **Backend Developer
 I'd love to connect with fellow developers, recruiters, and anyone passionate about backend development!
 
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue?style=for-the-badge&logo=linkedin)](YOUR_LINKEDIN_URL)
+- GitHub: [@DaniiMahecha](https://github.com/DaniiMahecha)
+- LinkedIn: [Daniel Felipe Mahecha Peña](https://www.linkedin.com/in/daniel-felipe-mahecha-peña)
 
 ---
 
@@ -329,7 +331,7 @@ This project was created for educational purposes as part of the ORACLE ONE Back
 
 <div align="center">
 
-**Crafted with ❤️ and ☕ by [Your Name]**
+**Crafted with ❤️ and ☕ by Daniel F. Mahecha**
 
 *Every line of code is a step forward. Every challenge is an opportunity to grow.*
 
